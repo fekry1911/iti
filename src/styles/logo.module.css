@@ -1,0 +1,32 @@
+.logo {
+  width: 25%;
+  height: 25%;
+  display: flex;
+  margin: 0 auto;
+  padding: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+}
+.aLinks:hover {
+  text-decoration: none;
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+.inputBorder:focus {
+  border-color: hsl(252, 100%, 75%) !important;
+  box-shadow: 0 0 0 0.4rem rgba(127, 94, 255, 0.25) !important;
+}
+.custom_checkbox :global(.form-check-input:checked) {
+  background-color: #7f5eff !important;
+  border-color: #7f5eff !important;
+}
+
+.custom_checkbox :global(.form-check-input:focus) {
+  border-color: #7f5eff !important;
+  box-shadow: 0 0 0 0.2rem rgba(127, 94, 255, 0.25) !important;
+}

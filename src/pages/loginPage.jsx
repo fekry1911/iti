@@ -2,36 +2,50 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import image from "../assets/images/logo1.png";
+import imageStyle from "../styles/logo.module.css";
+import { useNavigate } from "react-router";
 
 export default function LoginPage() {
+  let navigate = useNavigate();
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
       <div style={{ width: "400px" }}>
-        <img
-          src={image}
-          alt="logo"
-          className="img-fluid w-25 h-25 d-flex mx-auto m-0 p-0"
-        />
+        <img src={image} alt="logo" className={imageStyle.logo} />
         <div className="text-center mb-4">
           <h1 style={{ color: "#7F5EFF" }}>Welcome Back</h1>
-          <h5 className="text-muted">Welcome Back Please Enter Your Details</h5>
+          <h6 className="text-muted">Welcome Back Please Enter Your Details</h6>
         </div>
 
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter Your email" />
+            <Form.Control
+              className={`${imageStyle.inputBorder}`}
+              type="email"
+              placeholder="Enter Your email"
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="********" />
+            <Form.Control
+              className={`${imageStyle.inputBorder}`}
+              type="password"
+              placeholder="********"
+            />
           </Form.Group>
           <Form.Group
             className="mb-3 d-flex text-center align-items-center justify-content-between"
             controlId="formBasicCheckbox"
           >
-            <Form.Check type="checkbox" label="Remember me for 30 days" />
-            <Form.Label style={{ color: "#7F5EFF" }} className="mt-2">
+            <Form.Check
+              className={imageStyle.custom_checkbox}
+              type="checkbox"
+              label="Remember me for 30 days"
+            />
+            <Form.Label
+              style={{ color: "#7F5EFF" }}
+              className={`mt-2 ${imageStyle.aLinks}`}
+            >
               Forgot Password?
             </Form.Label>
           </Form.Group>
@@ -57,7 +71,11 @@ export default function LoginPage() {
 
           <div className="text-center d-flex d-flex justify-content-center align-items-center">
             <p className="m-1">Dont't Have any account?</p>
-            <p className="m-1" style={{ color: "#7F5EFF" }}>
+            <p
+              onClick={() => navigate("/register")}
+              className={`m-1 ${imageStyle.aLinks}`}
+              style={{ color: "#7F5EFF" }}
+            >
               Sign Up
             </p>
           </div>
