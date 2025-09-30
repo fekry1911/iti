@@ -9,7 +9,7 @@ export default function LandingPage() {
     let email = localStorage.getItem("token");
 
     setTimeout(() => {
-      if (email) {
+      if (false) {
         navigate("/main/home");
       } else {
         navigate("/auth/login");

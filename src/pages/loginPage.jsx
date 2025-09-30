@@ -8,8 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleLogin } from "../apis/handleApis";
 import { LoadingOverlay } from "../SharedComponents/loadingCompo";
 import { login } from "../redux/authSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function LoginPage() {
+  const notify = (message) => toast(message);
+
   const [valid, setvalid] = useState(true);
   let navigate = useNavigate();
   let email = useRef();
@@ -56,15 +59,19 @@ export default function LoginPage() {
         console.log("✅ Registered:", res);
 
         localStorage.setItem("token", res.data.token);
-        navigate("/main/home");
+        notify(res.message);
+        // navigate("/main/home");
       } catch (err) {
         console.error("❌ Error:", err);
+        notify(err.message);
       }
     }
   }
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
+      <Toaster />
+
       {loading && <LoadingOverlay />}
       <div style={{ width: "400px" }}>
         <img src={image} alt="logo" className={imageStyle.logo} />
@@ -79,22 +86,30 @@ export default function LoginPage() {
             <Form.Control
               ref={email}
               className={`${
-                !valid ? imageStyle.inputBorderError : imageStyle.inputBorder
+                errors.email
+                  ? imageStyle.inputBorderError
+                  : imageStyle.inputBorder
               }`}
               type="email"
               placeholder="Enter Your email"
             />
+            {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
               ref={password}
               className={`${
-                !valid ? imageStyle.inputBorderError : imageStyle.inputBorder
+                errors.password
+                  ? imageStyle.inputBorderError
+                  : imageStyle.inputBorder
               }`}
               type="password"
               placeholder="********"
             />
+            {errors.password && (
+              <p style={{ color: "red" }}>{errors.password}</p>
+            )}
           </Form.Group>
           <Form.Group
             className="mb-3 d-flex text-center align-items-center justify-content-between"

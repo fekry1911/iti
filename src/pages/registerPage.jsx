@@ -7,8 +7,11 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/registerSlice";
 import { LoadingOverlay } from "../SharedComponents/loadingCompo";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function RegisterPage() {
+  const notify = (message) => toast(message);
+
   let navigate = useNavigate();
   let email = useRef();
   let password = useRef();
@@ -72,15 +75,20 @@ export default function RegisterPage() {
         console.log("✅ Registered:", res);
 
         localStorage.setItem("token", res.data.token);
-        navigate("/auth/login");
+        notify(res.message);
+        // navigate("/auth/login");
       } catch (err) {
         console.error("❌ Error:", err);
+        err.data.email && notify(err.data.email[0]);
+        err.data.phone && notify(err.data.phone[0]);
       }
     }
   }
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
+      <Toaster />
+
       {loading && <LoadingOverlay />}
       <div style={{ width: "400px" }}>
         <img src={image} alt="logo" className={imageStyle.logo} />
@@ -93,7 +101,11 @@ export default function RegisterPage() {
             <Form.Label>Email address</Form.Label>
             <Form.Control
               ref={email}
-              className={`${imageStyle.inputBorder}`}
+              className={`${
+                errors.email
+                  ? imageStyle.inputBorderError
+                  : imageStyle.inputBorder
+              }`}
               type="email"
               placeholder="Enter Your email"
             />
@@ -104,7 +116,11 @@ export default function RegisterPage() {
             <Form.Label>Name</Form.Label>
             <Form.Control
               ref={name}
-              className={`${imageStyle.inputBorder}`}
+              className={`${
+                errors.name
+                  ? imageStyle.inputBorderError
+                  : imageStyle.inputBorder
+              }`}
               type="text"
               placeholder="Enter Your Name"
             />
@@ -115,7 +131,11 @@ export default function RegisterPage() {
             <Form.Label>Password</Form.Label>
             <Form.Control
               ref={password}
-              className={`${imageStyle.inputBorder}`}
+              className={`${
+                errors.password
+                  ? imageStyle.inputBorderError
+                  : imageStyle.inputBorder
+              }`}
               type="password"
               placeholder="********"
             />
@@ -128,7 +148,11 @@ export default function RegisterPage() {
             <Form.Label>Phone</Form.Label>
             <Form.Control
               ref={phone}
-              className={`${imageStyle.inputBorder}`}
+              className={`${
+                errors.phone
+                  ? imageStyle.inputBorderError
+                  : imageStyle.inputBorder
+              }`}
               type="phone"
               placeholder="Enter Your Phone"
             />
