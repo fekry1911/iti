@@ -1,14 +1,71 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import image from "../assets/images/logo1.png";
 import imageStyle from "../styles/logo.module.css";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { handleLogin } from "../apis/handleApis";
+import { LoadingOverlay } from "../SharedComponents/loadingCompo";
+import { login } from "../redux/authSlice";
 
 export default function LoginPage() {
+  const [valid, setvalid] = useState(true);
   let navigate = useNavigate();
+  let email = useRef();
+  let password = useRef();
+  let { user, loading, error } = useSelector((state) => state.auth);
+  let dispatch = useDispatch();
+  const [errors, setErrors] = useState({});
+
+  function validateForm(values) {
+    let newErrors = {};
+
+    if (!values.email) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      newErrors.email = "Email is invalid";
+    }
+
+    if (!values.password) {
+      newErrors.password = "Password is required";
+    } else if (values.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+
+    return newErrors;
+  }
+  async function handleSubmit(e) {
+    console.log(localStorage.getItem("token"));
+
+    e.preventDefault();
+
+    const data = {
+      email: email.current.value,
+      password: password.current.value,
+    };
+
+    const formErrors = validateForm(data);
+
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+    } else {
+      setErrors({});
+      try {
+        let res = await dispatch(login(data)).unwrap();
+        console.log("✅ Registered:", res);
+
+        localStorage.setItem("token", res.data.token);
+        navigate("/main/home");
+      } catch (err) {
+        console.error("❌ Error:", err);
+      }
+    }
+  }
+
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
+      {loading && <LoadingOverlay />}
       <div style={{ width: "400px" }}>
         <img src={image} alt="logo" className={imageStyle.logo} />
         <div className="text-center mb-4">
@@ -16,11 +73,14 @@ export default function LoginPage() {
           <h6 className="text-muted">Welcome Back Please Enter Your Details</h6>
         </div>
 
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
-              className={`${imageStyle.inputBorder}`}
+              ref={email}
+              className={`${
+                !valid ? imageStyle.inputBorderError : imageStyle.inputBorder
+              }`}
               type="email"
               placeholder="Enter Your email"
             />
@@ -28,7 +88,10 @@ export default function LoginPage() {
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              className={`${imageStyle.inputBorder}`}
+              ref={password}
+              className={`${
+                !valid ? imageStyle.inputBorderError : imageStyle.inputBorder
+              }`}
               type="password"
               placeholder="********"
             />
@@ -50,6 +113,7 @@ export default function LoginPage() {
             </Form.Label>
           </Form.Group>
           <Button
+            type="submit"
             style={{ backgroundColor: "#7F5EFF", border: "1px solid #7F5EFF" }}
             className="w-100 mb-3"
           >
@@ -72,7 +136,7 @@ export default function LoginPage() {
           <div className="text-center d-flex d-flex justify-content-center align-items-center">
             <p className="m-1">Dont't Have any account?</p>
             <p
-              onClick={() => navigate("/register")}
+              onClick={() => navigate("/auth/register")}
               className={`m-1 ${imageStyle.aLinks}`}
               style={{ color: "#7F5EFF" }}
             >

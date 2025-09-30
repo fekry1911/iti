@@ -5,7 +5,7 @@ import loginStyle from "../styles/loginAnimationStyle.module.css";
 
 export default function LoginAnimation() {
   return (
-    <div className=" container d-flex align-items-center justify-content-center min-vh-100">
+    <div className="  d-flex align-items-center justify-content-center min-vh-100 w-100">
       <Lottie
         className={loginStyle.loginStyle}
         animationData={login}
