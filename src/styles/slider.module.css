@@ -1,0 +1,17 @@
+.slider {
+  animation: identifier 1.5s linear;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+@keyframes identifier {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}

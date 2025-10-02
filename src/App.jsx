@@ -5,6 +5,7 @@ import AuthMainLayOut from "./layOuts/authMainLayOut";
 import MainLayout from "./layOuts/mainLayout";
 import LandingPage from "./pages/LandingPage";
 import HomeComponent from "./Components/HomeComponent";
+import ErrorPage from "./pages/errorPage";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +16,9 @@ const router = createBrowserRouter([
     path: "auth",
     element: <AuthMainLayOut />,
     children: [
-      { path: "login", element: <LoginPage /> },
+      { index: true, element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
+      { path: "*", element: <ErrorPage /> },
     ],
   },
   {
@@ -24,9 +26,10 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: "home",
+        index: true,
         element: <HomeComponent />,
       },
+      { path: "*", element: <ErrorPage /> },
     ],
   },
 ]);

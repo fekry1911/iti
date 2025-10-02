@@ -10,7 +10,7 @@ import { LoadingOverlay } from "../SharedComponents/loadingCompo";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function RegisterPage() {
-  const notify = (message) => toast(message);
+  // const notify = (message) => toast(message);
 
   let navigate = useNavigate();
   let email = useRef();
@@ -61,7 +61,7 @@ export default function RegisterPage() {
       phone: phone.current.value,
       password: password.current.value,
       password_confirmation: password.current.value,
-      gender: 0,
+      gender: "0",
     };
 
     const formErrors = validateForm(data);
@@ -72,23 +72,23 @@ export default function RegisterPage() {
       setErrors({});
       try {
         let res = await dispatch(registerUser(data)).unwrap();
-        console.log("✅ Registered:", res);
 
         localStorage.setItem("token", res.data.token);
-        notify(res.message);
-        // navigate("/auth/login");
+        toast.success(res.message);
+        navigate("/auth/login");
       } catch (err) {
-        console.error("❌ Error:", err);
-        err.data.email && notify(err.data.email[0]);
-        err.data.phone && notify(err.data.phone[0]);
+        if (err.data) {
+          err.data.email && toast.error(err.data.email[0]);
+          err.data.phone && toast.error(err.data.phone[0]);
+        } else {
+          toast.error(err.message);
+        }
       }
     }
   }
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
-      <Toaster />
-
       {loading && <LoadingOverlay />}
       <div style={{ width: "400px" }}>
         <img src={image} alt="logo" className={imageStyle.logo} />
@@ -170,7 +170,7 @@ export default function RegisterPage() {
           <div className="text-center d-flex justify-content-center align-items-center">
             <p className="m-1">Already Have Account?</p>
             <p
-              onClick={() => navigate("/auth/login")}
+              onClick={() => navigate("/auth")}
               className={`m-1 ${imageStyle.aLinks}`}
               style={{ color: "#7F5EFF", cursor: "pointer" }}
             >

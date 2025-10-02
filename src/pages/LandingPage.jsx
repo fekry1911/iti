@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
-import image from "../assets/images/logo1.png";
+import image from "../assets/images/mainLogo.png";
 import style from "../styles/landing.module.css";
 import { useNavigate } from "react-router";
 
 export default function LandingPage() {
   let navigate = useNavigate();
   useEffect(() => {
-    let email = localStorage.getItem("token");
+    let token = localStorage.getItem("token");
 
     setTimeout(() => {
-      if (false) {
-        navigate("/main/home");
+      if (token) {
+        navigate("/main");
       } else {
-        navigate("/auth/login");
+        navigate("/auth");
       }
-    }, 1500);
+    }, 3000);
   }, [navigate]);
 
   return (

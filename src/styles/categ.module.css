@@ -1,0 +1,24 @@
+.cate:hover {
+  border: 1px solid #725ea6;
+  box-shadow: 0 4px 8px rgba(114, 94, 166, 0.2);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+@keyframes pulse {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+.cate {
+  animation: pulse 2s;
+}
+.cateBackGround {
+  background-color: #92c1ef;
+}

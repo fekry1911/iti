@@ -1,0 +1,15 @@
+.allProducts {
+  padding: 10px;
+  animation: all 1.5s linear;
+  border-radius: 10px;
+}
+@keyframes all {
+  0% {
+    transform: translateX(600px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}

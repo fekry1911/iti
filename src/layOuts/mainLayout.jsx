@@ -5,9 +5,19 @@ import FooterComponent from "../SharedComponents/FooterCompo";
 
 export default function MainLayout() {
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
       <NavBarComponent />
-      <Outlet />
+
+      <div style={{ flex: 1 }}>
+        <Outlet />
+      </div>
+
       <FooterComponent />
     </div>
   );

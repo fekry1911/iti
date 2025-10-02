@@ -56,13 +56,11 @@ export default function LoginPage() {
       setErrors({});
       try {
         let res = await dispatch(login(data)).unwrap();
-        console.log("✅ Registered:", res);
 
         localStorage.setItem("token", res.data.token);
         notify(res.message);
-        // navigate("/main/home");
+        navigate("/main/home");
       } catch (err) {
-        console.error("❌ Error:", err);
         notify(err.message);
       }
     }

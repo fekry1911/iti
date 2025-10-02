@@ -21,19 +21,27 @@
     transform: scale(0.5);
     opacity: 1;
   }
+  25% {
+    transform: scale(1.5);
+    opacity: 0.25;
+  }
   50% {
-    transform: scale(2);
+    transform: scale(3);
     opacity: 0.5;
   }
+  75% {
+    transform: scale(4.5);
+    opacity: 0.75;
+  }
   100% {
-    transform: scale(2.5);
+    transform: scale(6);
     opacity: 0;
   }
 }
 
 .logo {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   z-index: 1;
 }

@@ -26,11 +26,11 @@
   box-shadow: 0 0 0 0.4rem rgba(255, 0, 0, 0.25) !important;
 }
 .custom_checkbox :global(.form-check-input:checked) {
-  background-color: #7f5eff !important;
-  border-color: #7f5eff !important;
+  background-color: #725ea6 !important;
+  border-color: #725ea6 !important;
 }
 
 .custom_checkbox :global(.form-check-input:focus) {
-  border-color: #7f5eff !important;
-  box-shadow: 0 0 0 0.2rem rgba(127, 94, 255, 0.25) !important;
+  border-color: #725ea6 !important;
+  box-shadow: 0 0 0 0.2rem rgba(114, 94, 166, 0.25) !important;
 }
