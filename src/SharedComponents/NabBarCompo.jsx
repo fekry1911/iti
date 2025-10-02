@@ -1,21 +1,23 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import image from "../assets/images/mainLogo.png";
 import style from "../styles/navBar.module.css";
 import { FiShoppingCart } from "react-icons/fi";
 import { IconContext } from "react-icons";
 
 function NavBarComponent() {
+  let navigate = useNavigate();
+  function logOut() {
+    localStorage.removeItem("token");
+    setTimeout(() => {
+      navigate("/auth");
+    }, 2000);
+  }
   return (
     <div>
-      <Navbar
-        style={{
-          backgroundColor: " #ffffffff",
-          borderBottom: "1px solid  #7f5eff",
-        }}
-      >
+      <Navbar className={style.Nav}>
         <Container>
           <Nav className="me-auto d-flex">
             <Nav.Link href="#home">Home</Nav.Link>
@@ -54,7 +56,7 @@ function NavBarComponent() {
 
           <Nav className="ms-auto d-flex">
             <Nav.Link href="#about">About</Nav.Link>
-            <Nav.Link href="#logout">LogOut</Nav.Link>
+            <Nav.Link onClick={logOut}>LogOut</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

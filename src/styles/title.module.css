@@ -1,0 +1,17 @@
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  animation: all 1.5s linear;
+}
+@keyframes all {
+  0% {
+    transform: translateX(-600px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}

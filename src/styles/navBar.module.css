@@ -50,3 +50,6 @@
   padding: 0 !important;
   display: block;
 }
+.nav {
+  background: linear-gradient(135deg, #e9ebef, #c3cfe2);
+}

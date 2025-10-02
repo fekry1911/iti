@@ -1,5 +1,5 @@
 .cate:hover {
-  border: 1px solid #725ea6;
+  border: 1px solid #b0a9c3;
   box-shadow: 0 4px 8px rgba(114, 94, 166, 0.2);
   transform: scale(1.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -17,8 +17,17 @@
   }
 }
 .cate {
-  animation: pulse 2s;
+  border: 1px solid;
+  border-radius: 10px;
+  animation: pulse 2s ease;
 }
 .cateBackGround {
   background-color: #92c1ef;
+}
+.name_text {
+  font-weight: 400; /* Weight / Regular */
+  font-style: normal; /* Style / Regular */
+  font-size: 16px; /* Size */
+  line-height: 24px; /* Line height */
+  letter-spacing: 0; /* Letter spacing 0% */
 }

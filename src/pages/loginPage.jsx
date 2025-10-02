@@ -59,7 +59,7 @@ export default function LoginPage() {
 
         localStorage.setItem("token", res.data.token);
         notify(res.message);
-        navigate("/main/home");
+        navigate("/main");
       } catch (err) {
         notify(err.message);
       }

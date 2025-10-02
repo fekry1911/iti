@@ -6,6 +6,15 @@ import AnimationLoadingCompo from "../SharedComponents/animationLoadingCompo";
 import { getProducts } from "../redux/productsSlice";
 import SideBarCombo from "./sideBarCombo";
 import style from "../styles/products.module.css";
+import Flags from "../SharedComponents/flags";
+import Title from "./title";
+import Button from "react-bootstrap/Button";
+import shoes from "../assets/categ/shoes.png";
+import all from "../assets/categ/all.png";
+import elec from "../assets/categ/elec.png";
+import clothes from "../assets/categ/clothes.png";
+import furnitures from "../assets/categ/furnitures.png";
+import miscellaneous from "../assets/categ/miscellaneous.png";
 
 export default function HomeComponent() {
   let { items, loading, error } = useSelector((state) => state.products);
@@ -13,6 +22,7 @@ export default function HomeComponent() {
   useEffect(() => {
     dispatch(getProducts());
   }, []);
+  let images = [clothes, elec, furnitures, shoes, miscellaneous, all];
   let categories = [
     "Clothes",
     "Electronics",
@@ -24,54 +34,63 @@ export default function HomeComponent() {
   return (
     <div style={{ flex: 1 }} className="container">
       <SimpleSlider />
-      <h3
-        style={{
-          alignItems: "center",
-          textAlign: "center",
-          margin: "50px 0px 30px 0px",
-        }}
-      >
-        Our Products
-      </h3>
+      <Flags title={"Today's"} />
+      <Title title={"Flash Sales"} />
+
+      {loading ? (
+        <AnimationLoadingCompo />
+      ) : (
+        <>
+          <div className={`${style.allProducts} row gx-3 mb-5`}>
+            {items.map(
+              (item, index) =>
+                index < 6 && (
+                  <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
+                    <CardComponent item={item} className="flex-fill h-100" />
+                  </div>
+                )
+            )}
+          </div>
+          <div
+            style={{ width: "100%" }}
+            className="mb-5 d-flex justify-content-center align-items-center "
+          >
+            <Button
+              onClick={() => console.log(items.length)}
+              className={`${style.button} mb-3`}
+            >
+              View All Products
+            </Button>
+          </div>
+        </>
+      )}
+      <hr></hr>
+      <Flags title={"Categories"} />
+      <Title title={"Browse By Category"} />
+      <div className="row   mb-5 g-3">
+        {categories.map((item, index) => (
+          <div className="col-6 col-md-3 col-lg-2">
+            <SideBarCombo item={item} image={images[index]} />
+          </div>
+        ))}
+      </div>
+      <hr></hr>
+
+      <Flags title={"This Month"} />
+      <Title title={"Best Selling Products"} />
       {loading ? (
         <AnimationLoadingCompo />
       ) : (
         <div className={`${style.allProducts} row gx-3 mb-5`}>
           {items.map(
             (item, index) =>
-              index < 6 && (
+              index > 6 &&
+              index < 15 && (
                 <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
                   <CardComponent item={item} className="flex-fill h-100" />
                 </div>
               )
           )}
-        </div>
-      )}{" "}
-      <div className="row text-center mb-5 g-3">
-        {categories.map((item) => (
-          <div className="col-6 col-md-3 col-lg-2">
-            <SideBarCombo item={item} />
-          </div>
-        ))}
-      </div>
-      <h3
-        style={{
-          alignItems: "center",
-          textAlign: "center",
-          margin: "50px 0px 30px 0px",
-        }}
-      >
-        All Products
-      </h3>
-      {loading ? (
-        <AnimationLoadingCompo />
-      ) : (
-        <div className={`${style.allProducts} row gx-3 mb-5`}>
-          {items.map((item, index) => (
-            <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
-              <CardComponent item={item} className="flex-fill h-100" />
-            </div>
-          ))}
         </div>
       )}
     </div>

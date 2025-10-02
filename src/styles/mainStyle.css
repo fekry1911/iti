@@ -8,8 +8,8 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
   overflow-x: hidden;
+  background: linear-gradient(135deg, #e9ebef, #c3cfe2);
 }
 .slick-dots li button:before {
   font-size: 10px;

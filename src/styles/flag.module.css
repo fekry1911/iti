@@ -1,0 +1,30 @@
+.flag {
+  margin-right: 10px;
+  height: 40px;
+  width: 20px;
+  border-radius: 4px;
+  background-color: #db4444;
+}
+.title {
+  color: #db4444;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+.container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  animation: all 1.5s linear;
+}
+@keyframes all {
+  0% {
+    transform: translateX(-600px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
