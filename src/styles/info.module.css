@@ -1,0 +1,45 @@
+.card {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.parent {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background-color: #b8b7b9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 24px auto; /* auto عشان يتسنتر في النص */
+}
+
+.child {
+  height: 58px;
+  width: 58px;
+  border-radius: 50%;
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 8px;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #555;
+}

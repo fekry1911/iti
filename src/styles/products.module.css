@@ -25,3 +25,15 @@
   cursor: pointer;
   transform: scale(1.03);
 }
+.button2:hover {
+  background-color: #b32b2b !important;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  transform: scale(1.03);
+}
+.button2 {
+  width: 159px;
+  height: 56px;
+  background-color: #db4444 !important;
+  border: none !important;
+}

@@ -1,0 +1,19 @@
+.image:hover {
+  transform: scale(1.04);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+@keyframes animation1 {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+.arrivals {
+  animation: animation1 1.5s linear;
+}

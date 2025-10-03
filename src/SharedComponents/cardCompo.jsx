@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import style from "../styles/card.module.css";
 import Rating from "@mui/material/Rating";
 import image from "../assets/images/download.png";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
 
 function CardComponent({ item }) {
   return (
@@ -13,14 +14,48 @@ function CardComponent({ item }) {
         maxWidth: "270px",
         maxHeight: "350px",
         marginBottom: "10px",
+        position: "relative",
       }}
     >
+      <div style={{ position: "absolute", top: "12px", right: "12px" }}>
+        <div
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            backgroundColor: "#FFFFFF",
+            height: "34px",
+            width: "34px",
+            borderRadius: "50%",
+            marginBottom: "8px",
+            textAlign: "center",
+          }}
+        >
+          <FaHeart />
+        </div>
+        <div
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            display: "flex",
+            backgroundColor: "#FFFFFF",
+            height: "34px",
+            width: "34px",
+            borderRadius: "50%",
+          }}
+        >
+          <FaShoppingCart />
+        </div>
+      </div>
+
       <Card.Img
-        variant="top"
         style={{
-          maxHeight: "250px",
+          height: "250px",
           objectFit: "cover",
           marginBottom: "16px",
+          width: "100%",
+          overflow: "hidden",
         }}
         alt={item.slug}
         src={item.images[0]}

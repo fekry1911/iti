@@ -37,7 +37,7 @@ export default function SimpleSlider() {
               alt={`slide-${index}`}
               style={{
                 width: "100%",
-                height: "35vh",
+                height: "50vh",
                 objectFit: "cover",
                 borderRadius: "5px",
               }}

@@ -75,7 +75,7 @@ export default function RegisterPage() {
 
         localStorage.setItem("token", res.data.token);
         toast.success(res.message);
-        navigate("/auth/login");
+        navigate("/auth");
       } catch (err) {
         if (err.data) {
           err.data.email && toast.error(err.data.email[0]);

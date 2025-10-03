@@ -15,6 +15,10 @@ import elec from "../assets/categ/elec.png";
 import clothes from "../assets/categ/clothes.png";
 import furnitures from "../assets/categ/furnitures.png";
 import miscellaneous from "../assets/categ/miscellaneous.png";
+import Enhance from "./enhance";
+
+import Arrivals from "./arrivals";
+import InfoCompo from "./infoCompo";
 
 export default function HomeComponent() {
   let { items, loading, error } = useSelector((state) => state.products);
@@ -77,7 +81,15 @@ export default function HomeComponent() {
       <hr></hr>
 
       <Flags title={"This Month"} />
-      <Title title={"Best Selling Products"} />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Title title={"Best Selling Products"} />
+        <Button
+          onClick={() => console.log(items.length)}
+          className={`${style.button2} mb-3`}
+        >
+          View All
+        </Button>
+      </div>
       {loading ? (
         <AnimationLoadingCompo />
       ) : (
@@ -85,7 +97,7 @@ export default function HomeComponent() {
           {items.map(
             (item, index) =>
               index > 6 &&
-              index < 15 && (
+              index < 13 && (
                 <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
                   <CardComponent item={item} className="flex-fill h-100" />
                 </div>
@@ -93,6 +105,35 @@ export default function HomeComponent() {
           )}
         </div>
       )}
+      <Enhance />
+      <Flags title={"Our Products"} />
+      <Title title={"Explore Our Products"} />
+      <div className={`${style.allProducts} row gx-3 mb-5`}>
+        {items.map(
+          (item, index) =>
+            index > 6 &&
+            index < 19 && (
+              <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
+                <CardComponent item={item} className="flex-fill h-100" />
+              </div>
+            )
+        )}
+        <div
+          style={{ width: "100%" }}
+          className="mb-5 mt-5 d-flex justify-content-center align-items-center "
+        >
+          <Button
+            onClick={() => console.log(items.length)}
+            className={`${style.button} mb-3`}
+          >
+            View All Products
+          </Button>
+        </div>
+      </div>
+      <Flags title={"Featured"} />
+      <Title title={"New Arrival"} />
+      <Arrivals />
+      <InfoCompo />
     </div>
   );
 }
