@@ -19,6 +19,7 @@ import Enhance from "./enhance";
 
 import Arrivals from "./arrivals";
 import InfoCompo from "./infoCompo";
+import ProductDetails from "./productDetails";
 
 export default function HomeComponent() {
   let { items, loading, error } = useSelector((state) => state.products);
@@ -134,6 +135,7 @@ export default function HomeComponent() {
       <Title title={"New Arrival"} />
       <Arrivals />
       <InfoCompo />
+      {items.length > 0 && <ProductDetails product={items[0]} />}
     </div>
   );
 }

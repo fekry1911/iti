@@ -1,0 +1,42 @@
+.counterWrapper {
+  height: 56px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #333;
+  font-weight: 700;
+  font-size: 24px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btnplus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #333;
+  font-weight: 700;
+  font-size: 24px;
+  background: #db4444;
+  cursor: pointer;
+}
+.left {
+  border-radius: 5px 0 0 5px;
+}
+
+.right {
+  border-radius: 0 5px 5px 0;
+}
+
+.value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  font-weight: 700;
+  font-size: 20px;
+}

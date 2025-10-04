@@ -13,12 +13,9 @@ export default function MainLayout() {
       }}
     >
       <NavBarComponent />
-
       <div style={{ flex: 1 }}>
         <Outlet />
       </div>
-
-      <FooterComponent />
     </div>
   );
 }
