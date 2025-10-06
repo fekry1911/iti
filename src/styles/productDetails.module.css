@@ -10,7 +10,7 @@
 }
 .reviwes {
   font-family: "Inter", sans-serif;
-  font-weight: 400; /* Regular */
+  font-weight: 400;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0;
@@ -20,18 +20,18 @@
 }
 .stock {
   font-family: "Inter", sans-serif;
-  font-weight: 400; /* Regular */
+  font-weight: 400;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0;
-  color: #00a86b; /* أخضر */
+  color: #00a86b;
   margin: 0;
   padding: 0;
 }
 
 .price {
   font-family: "Inter", sans-serif;
-  font-weight: 400; /* Regular */
+  font-weight: 400;
   font-size: 24px;
   margin-bottom: 24px;
   letter-spacing: 0.03em;
@@ -39,7 +39,7 @@
   padding: 0;
 }
 .desc {
-  font-weight: 600; /* Regular */
+  font-weight: 600;
   font-size: 14px;
   letter-spacing: 0;
   margin-bottom: 24px;
@@ -47,7 +47,12 @@
   padding: 0;
 }
 hr {
-  height: 2px; /* thickness of the line */
-  border: none; /* remove default border */
-  background-color: #000; /* line color */
+  height: 2px;
+  border: none;
+  background-color: #000;
+}
+.image:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "../styles/counter.module.css";
 
 export default function Counter() {
-  const [count, setCount] = useState(4);
+  const [count, setCount] = useState(1);
 
   return (
     <div className={`row col-5 m-0 p-0 ${style.counterWrapper}`}>

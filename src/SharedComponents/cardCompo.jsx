@@ -5,13 +5,19 @@ import style from "../styles/card.module.css";
 import Rating from "@mui/material/Rating";
 import image from "../assets/images/download.png";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 function CardComponent({ item }) {
+  let { cartItem, loading, error } = useSelector((state) => state.cartItem);
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
   return (
     <Card
+      onClick={() => navigate(`details/${item.id}`)}
       className={style.card}
       style={{
-        maxWidth: "270px",
+        width: "100%",
         maxHeight: "350px",
         marginBottom: "10px",
         position: "relative",
@@ -45,7 +51,7 @@ function CardComponent({ item }) {
             borderRadius: "50%",
           }}
         >
-          <FaShoppingCart />
+          <FaShoppingCart onClick={() => dispatch.addItemToCart(item)} />
         </div>
       </div>
 

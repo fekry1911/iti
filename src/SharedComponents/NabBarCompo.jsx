@@ -6,8 +6,11 @@ import image from "../assets/images/mainLogo.png";
 import style from "../styles/navBar.module.css";
 import { FiShoppingCart } from "react-icons/fi";
 import { IconContext } from "react-icons";
+import { CartContext } from "../context/cartContext";
+import { useContext } from "react";
 
 function NavBarComponent() {
+  const { items } = useContext(CartContext);
   let navigate = useNavigate();
   function logOut() {
     localStorage.removeItem("token");
@@ -44,7 +47,7 @@ function NavBarComponent() {
                   justifyContent: "center",
                 }}
               >
-                1
+                {items.length}
               </div>
               <IconContext.Provider value={{ className: style.icon }}>
                 <div>

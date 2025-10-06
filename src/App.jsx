@@ -6,6 +6,10 @@ import MainLayout from "./layOuts/mainLayout";
 import LandingPage from "./pages/LandingPage";
 import HomeComponent from "./Components/HomeComponent";
 import ErrorPage from "./pages/errorPage";
+import ProductDetails from "./Components/productDetails";
+import CartProvider from "./context/cardProvider";
+import { WishContext } from "./context/wishContext";
+import WishProvider from "./context/wishProvider";
 
 const router = createBrowserRouter([
   {
@@ -29,13 +33,20 @@ const router = createBrowserRouter([
         index: true,
         element: <HomeComponent />,
       },
+      { path: "details/:id", element: <ProductDetails /> },
       { path: "*", element: <ErrorPage /> },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <WishProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </WishProvider>
+  );
 }
 
 export default App;

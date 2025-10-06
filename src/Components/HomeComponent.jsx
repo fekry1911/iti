@@ -16,10 +16,8 @@ import clothes from "../assets/categ/clothes.png";
 import furnitures from "../assets/categ/furnitures.png";
 import miscellaneous from "../assets/categ/miscellaneous.png";
 import Enhance from "./enhance";
-
 import Arrivals from "./arrivals";
 import InfoCompo from "./infoCompo";
-import ProductDetails from "./productDetails";
 
 export default function HomeComponent() {
   let { items, loading, error } = useSelector((state) => state.products);
@@ -109,33 +107,36 @@ export default function HomeComponent() {
       <Enhance />
       <Flags title={"Our Products"} />
       <Title title={"Explore Our Products"} />
-      <div className={`${style.allProducts} row gx-3 mb-5`}>
-        {items.map(
-          (item, index) =>
-            index > 6 &&
-            index < 19 && (
-              <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
-                <CardComponent item={item} className="flex-fill h-100" />
-              </div>
-            )
-        )}
-        <div
-          style={{ width: "100%" }}
-          className="mb-5 mt-5 d-flex justify-content-center align-items-center "
-        >
-          <Button
-            onClick={() => console.log(items.length)}
-            className={`${style.button} mb-3`}
+      {loading ? (
+        <AnimationLoadingCompo />
+      ) : (
+        <div className={`${style.allProducts} row gx-3 mb-5`}>
+          {items.map(
+            (item, index) =>
+              index > 6 &&
+              index < 19 && (
+                <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
+                  <CardComponent item={item} className="flex-fill h-100" />
+                </div>
+              )
+          )}
+          <div
+            style={{ width: "100%" }}
+            className="mb-5 mt-5 d-flex justify-content-center align-items-center "
           >
-            View All Products
-          </Button>
+            <Button
+              onClick={() => console.log(items.length)}
+              className={`${style.button} mb-3`}
+            >
+              View All Products
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
       <Flags title={"Featured"} />
       <Title title={"New Arrival"} />
       <Arrivals />
       <InfoCompo />
-      {items.length > 0 && <ProductDetails product={items[0]} />}
     </div>
   );
 }
