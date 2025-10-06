@@ -9,12 +9,12 @@ import free from "../assets/images/free.png";
 import AnimationLoadingCompo from "../SharedComponents/animationLoadingCompo";
 import { getOneProduct } from "../redux/getProductSlice";
 import { addItemToCart } from "../redux/addToCartSlice";
+import { removeItemFromCart } from "../redux/removeFromCart";
+import { addItemToWishList } from "../redux/addToWishList";
+import { removeItemFromWish } from "../redux/removeFromWish";
 import { CartContext } from "../context/cartContext";
 import { WishContext } from "../context/wishContext";
 import styleButton from "../styles/sharedButton.module.css";
-import { removeItemFromCart } from "../redux/removeFromCart";
-import { removeItemFromWish } from "../redux/removeFromWish";
-import { addItemToWishList } from "../redux/addToWishList";
 
 export default function ProductDetails() {
   const { items, setItems } = useContext(CartContext);
@@ -22,49 +22,62 @@ export default function ProductDetails() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { item, loading } = useSelector((state) => state.product);
+
   const [mainImage, setMainImage] = useState(null);
+  const [foundInCart, setFoundInCart] = useState(false);
+  const [foundInWish, setFoundInWish] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     dispatch(getOneProduct(id));
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (item?.images?.length > 0) {
-      setMainImage(item.images[0]);
-    }
+    if (item?.images?.length > 0) setMainImage(item.images[0]);
   }, [item]);
 
-  const foundInCart = items?.find((product) => product.id === item?.id);
-  const handleCartToggle = () => {
-    if (!item) return;
+  useEffect(() => {
+    const inCart = items?.some((p) => String(p.id) === String(id));
+    setFoundInCart(inCart);
+  }, [items, id]);
 
-    if (foundInCart) {
-      dispatch(removeItemFromCart(id))
-        .unwrap()
-        .then(() => setItems(items.filter((p) => p.id !== item.id)))
-        .catch(console.error);
-    } else {
-      dispatch(addItemToCart(item))
-        .unwrap()
-        .then(() => setItems((prev) => [...prev, item]))
-        .catch(console.error);
+  useEffect(() => {
+    const inWish = allWishitems?.some((p) => String(p.id) === String(id));
+    setFoundInWish(inWish);
+  }, [allWishitems, id]);
+
+  const handleCartToggle = async () => {
+    if (!item) return;
+    try {
+      if (foundInCart) {
+        await dispatch(removeItemFromCart(id)).unwrap();
+        setItems((prev) => prev.filter((p) => String(p.id) !== String(id)));
+        setFoundInCart(false);
+      } else {
+        const newitem = { ...item, quantity: quantity };
+        await dispatch(addItemToCart(newitem)).unwrap();
+        setItems((prev) => [...prev, newitem]);
+        setFoundInCart(true);
+      }
+    } catch (err) {
+      console.error("Cart error:", err);
     }
   };
 
-  const foundInWish = allWishitems?.find((product) => product.id === item?.id);
-  const handleWishToggle = () => {
+  const handleWishToggle = async () => {
     if (!item) return;
-
-    if (foundInWish) {
-      dispatch(removeItemFromWish(id))
-        .unwrap()
-        .then(() => setWishItems(allWishitems.filter((p) => p.id !== item.id)))
-        .catch(console.error);
-    } else {
-      dispatch(addItemToWishList(item))
-        .unwrap()
-        .then(() => setWishItems((prev) => [...prev, item]))
-        .catch(console.error);
+    try {
+      if (foundInWish) {
+        await dispatch(removeItemFromWish(id)).unwrap();
+        setWishItems((prev) => prev.filter((p) => String(p.id) !== String(id)));
+        setFoundInWish(false);
+      } else {
+        await dispatch(addItemToWishList(item)).unwrap();
+        setWishItems((prev) => [...prev, item]);
+        setFoundInWish(true);
+      }
+    } catch (err) {
+      console.error("Wishlist error:", err);
     }
   };
 
@@ -104,6 +117,7 @@ export default function ProductDetails() {
             ))}
           </div>
 
+          {/* الصورة الرئيسية */}
           <div className="col-lg-5 col-md-7 col-12 me-5">
             <img
               style={{
@@ -117,6 +131,7 @@ export default function ProductDetails() {
             />
           </div>
 
+          {/* تفاصيل المنتج */}
           <div
             style={{ height: "600px", overflowY: "hidden" }}
             className="col-lg-4 col-12"
@@ -165,7 +180,7 @@ export default function ProductDetails() {
             </div>
 
             <div className="row container mb-3 justify-content-between">
-              <Counter />
+              <Counter onChange={setQuantity} />
               <SharedButton className={styleButton.button2} title={"Buy Now"} />
             </div>
 

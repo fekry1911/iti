@@ -1,67 +1,50 @@
 {
   "carts": [
     {
-      "id": "34",
-      "title": "Modern Ergonomic Office Chair",
-      "slug": "modern-ergonomic-office-chair",
-      "price": 71,
-      "description": "Elevate your office space with this sleek and comfortable Modern Ergonomic Office Chair. Designed to provide optimal support throughout the workday, it features an adjustable height mechanism, smooth-rolling casters for easy mobility, and a cushioned seat for extended comfort. The clean lines and minimalist white design make it a versatile addition to any contemporary workspace.",
-      "category": {
-        "id": 3,
-        "name": "Furniture",
-        "slug": "furniture",
-        "image": "https://i.imgur.com/Qphac99.jpeg",
-        "creationAt": "2025-10-04T23:50:55.000Z",
-        "updatedAt": "2025-10-04T23:50:55.000Z"
-      },
-      "images": [
-        "https://i.imgur.com/3dU0m72.jpeg",
-        "https://i.imgur.com/zPU3EVa.jpeg"
-      ],
-      "creationAt": "2025-10-04T23:50:55.000Z",
-      "updatedAt": "2025-10-04T23:50:55.000Z"
-    },
-    {
-      "id": "29",
-      "title": "Mid-Century Modern Wooden Dining Table (patched)",
-      "slug": "mid-century-modern-wooden-dining-table-patched",
-      "price": 24,
-      "description": "Elevate your dining room with this sleek Mid-Century Modern dining table, featuring an elegant walnut finish and tapered legs for a timeless aesthetic. Its sturdy wood construction and minimalist design make it a versatile piece that fits with a variety of decor styles. Perfect for intimate dinners or as a stylish spot for your morning coffee.",
-      "category": {
-        "id": 3,
-        "name": "Furniture",
-        "slug": "furniture",
-        "image": "https://i.imgur.com/Qphac99.jpeg",
-        "creationAt": "2025-10-04T23:50:55.000Z",
-        "updatedAt": "2025-10-04T23:50:55.000Z"
-      },
-      "images": [
-        "https://i.imgur.com/DMQHGA0.jpeg",
-        "https://i.imgur.com/qrs9QBg.jpeg",
-        "https://i.imgur.com/XVp8T1I.jpeg"
-      ],
-      "creationAt": "2025-10-04T23:50:55.000Z",
-      "updatedAt": "2025-10-05T20:12:19.000Z"
-    },
-    {
-      "id": "1",
-      "title": "Updated Product",
-      "slug": "updated-product",
-      "price": 30,
-      "description": "Updated description",
+      "id": "2",
+      "title": "Ahmed",
+      "slug": "ahmed",
+      "price": 10,
+      "description": "Elevate your casual wardrobe with our Classic Red Pullover Hoodie. Crafted with a soft cotton blend for ultimate comfort, this vibrant red hoodie features a kangaroo pocket, adjustable drawstring hood, and ribbed cuffs for a snug fit. The timeless design ensures easy pairing with jeans or joggers for a relaxed yet stylish look, making it a versatile addition to your everyday attire.",
       "category": {
         "id": 1,
         "name": "Clothes",
         "slug": "clothes",
         "image": "https://i.imgur.com/QkIa5tT.jpeg",
-        "creationAt": "2025-10-06T00:22:59.000Z",
-        "updatedAt": "2025-10-06T00:22:59.000Z"
+        "creationAt": "2025-10-06T15:04:15.000Z",
+        "updatedAt": "2025-10-06T15:04:15.000Z"
       },
       "images": [
-        "https://i.imgur.com/QkIa5tT.jpeg"
+        "https://i.imgur.com/1twoaDy.jpeg",
+        "https://i.imgur.com/FDwQgLy.jpeg",
+        "https://i.imgur.com/kg1ZhhH.jpeg"
       ],
-      "creationAt": "2025-10-06T00:22:59.000Z",
-      "updatedAt": "2025-10-06T06:46:46.000Z"
+      "creationAt": "2025-10-06T15:04:15.000Z",
+      "updatedAt": "2025-10-06T20:44:03.000Z",
+      "quantity": 1
+    },
+    {
+      "id": "5",
+      "title": "Classic Black Hooded Sweatshirt",
+      "slug": "classic-black-hooded-sweatshirt",
+      "price": 79,
+      "description": "Elevate your casual wardrobe with our Classic Black Hooded Sweatshirt. Made from high-quality, soft fabric that ensures comfort and durability, this hoodie features a spacious kangaroo pocket and an adjustable drawstring hood. Its versatile design makes it perfect for a relaxed day at home or a casual outing.",
+      "category": {
+        "id": 1,
+        "name": "Clothes",
+        "slug": "clothes",
+        "image": "https://i.imgur.com/QkIa5tT.jpeg",
+        "creationAt": "2025-10-06T15:04:15.000Z",
+        "updatedAt": "2025-10-06T15:04:15.000Z"
+      },
+      "images": [
+        "https://i.imgur.com/cSytoSD.jpeg",
+        "https://i.imgur.com/WwKucXb.jpeg",
+        "https://i.imgur.com/cE2Dxh9.jpeg"
+      ],
+      "creationAt": "2025-10-06T15:04:15.000Z",
+      "updatedAt": "2025-10-06T15:04:15.000Z",
+      "quantity": 4
     }
   ],
   "wishlist": []

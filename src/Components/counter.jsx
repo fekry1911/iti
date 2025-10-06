@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "../styles/counter.module.css";
 
-export default function Counter() {
+export default function Counter({ onChange }) {
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    if (onChange) onChange(count);
+  }, [count, onChange]);
 
   return (
     <div className={`row col-5 m-0 p-0 ${style.counterWrapper}`}>

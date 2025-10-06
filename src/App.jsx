@@ -10,6 +10,7 @@ import ProductDetails from "./Components/productDetails";
 import CartProvider from "./context/cardProvider";
 import { WishContext } from "./context/wishContext";
 import WishProvider from "./context/wishProvider";
+import Cart from "./Components/cart";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
         index: true,
         element: <HomeComponent />,
       },
+      { path: "cart", element: <Cart /> },
       { path: "details/:id", element: <ProductDetails /> },
       { path: "*", element: <ErrorPage /> },
     ],
