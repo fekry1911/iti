@@ -1,9 +1,10 @@
 import axios from "axios";
 
 let BASE_URL = "https://vcare.integration25.com/api";
-let BASE_URL_PRODUCTS = "https://api.escuelajs.co/api/v1/products";
+let BASE_URL_PRODUCTS = `https://api.escuelajs.co/api/v1/products`;
 let BASE_URL_CART = "http://localhost:5000/carts";
 let BASE_URL_WISHLIST = "http://localhost:5000/wishlist";
+let BASE_URL_PRODUCTS_RANGE = `https://api.escuelajs.co/api/v1/products/?price_min=100&price_max=1000`;
 
 export async function handleLogin(data) {
   let response = await axios.post(`${BASE_URL}/auth/login`, data);

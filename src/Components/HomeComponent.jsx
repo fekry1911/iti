@@ -18,12 +18,30 @@ import miscellaneous from "../assets/categ/miscellaneous.png";
 import Enhance from "./enhance";
 import Arrivals from "./arrivals";
 import InfoCompo from "./infoCompo";
+import { useNavigate } from "react-router";
+import delivery from "../assets/images/delivery.png";
+import head from "../assets/images/head.png";
+import shield from "../assets/images/shield.png";
 
 export default function HomeComponent() {
+  let titles = [
+    "FREE AND FAST DELIVERY",
+    "24/7 CUSTOMER SERVICE",
+    "MONEY BACK GUARANTEE",
+  ];
+  let texts = [
+    "Free delivery for all orders over $140",
+    "Friendly 24/7 customer support",
+    "We return money within 30 days",
+  ];
+  let images1 = [delivery, head, shield];
   let { items, loading, error } = useSelector((state) => state.products);
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   useEffect(() => {
-    dispatch(getProducts());
+    if (items.length == 0) {
+      dispatch(getProducts());
+    }
   }, []);
   let images = [clothes, elec, furnitures, shoes, miscellaneous, all];
   let categories = [
@@ -59,7 +77,7 @@ export default function HomeComponent() {
             className="mb-5 d-flex justify-content-center align-items-center "
           >
             <Button
-              onClick={() => console.log(items.length)}
+              onClick={() => navigate("all")}
               className={`${style.button} mb-3`}
             >
               View All Products
@@ -83,7 +101,7 @@ export default function HomeComponent() {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Title title={"Best Selling Products"} />
         <Button
-          onClick={() => console.log(items.length)}
+          onClick={() => navigate("all")}
           className={`${style.button2} mb-3`}
         >
           View All
@@ -125,7 +143,7 @@ export default function HomeComponent() {
             className="mb-5 mt-5 d-flex justify-content-center align-items-center "
           >
             <Button
-              onClick={() => console.log(items.length)}
+              onClick={() => navigate("all")}
               className={`${style.button} mb-3`}
             >
               View All Products
@@ -136,7 +154,7 @@ export default function HomeComponent() {
       <Flags title={"Featured"} />
       <Title title={"New Arrival"} />
       <Arrivals />
-      <InfoCompo />
+      <InfoCompo images={images1} titles={titles} texts={texts} />
     </div>
   );
 }

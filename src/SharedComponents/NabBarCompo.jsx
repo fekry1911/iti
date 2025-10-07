@@ -9,9 +9,13 @@ import { FiShoppingCart } from "react-icons/fi";
 import { IconContext } from "react-icons";
 import { CartContext } from "../context/cartContext";
 import { useContext } from "react";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { WishContext } from "../context/wishContext";
 
 function NavBarComponent() {
   const { items } = useContext(CartContext);
+  const { allWishitems } = useContext(WishContext);
+
   const navigate = useNavigate();
 
   function logOut() {
@@ -48,38 +52,110 @@ function NavBarComponent() {
         <Navbar.Collapse id="main-navbar">
           <Nav className="mx-auto gap-3 text-center">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-            <Nav.Link onClick={() => navigate("/shop")}>Shop</Nav.Link>
             <Nav.Link onClick={() => navigate("/contact")}>Contact</Nav.Link>
-            <Nav.Link onClick={() => navigate("/about")}>About</Nav.Link>
+            <Nav.Link onClick={() => navigate("about")}>About</Nav.Link>
           </Nav>
 
           <Nav className="d-flex align-items-center gap-3">
-            <div style={{ position: "relative", cursor: "pointer" }}>
-              <IconContext.Provider value={{ className: style.icon }}>
-                <FiShoppingCart
-                  size={22}
-                  color="white"
-                  onClick={() => navigate("cart")}
-                />
-              </IconContext.Provider>
+            <div
+              style={{
+                position: "relative",
+                cursor: "pointer",
+                transition: "transform 0.2s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
+            >
+              <div
+                onClick={() => navigate("cart")}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#fff",
+                  height: "38px",
+                  width: "38px",
+                  borderRadius: "50%",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                }}
+              >
+                <FaShoppingCart color="#2c3e50" size={18} />
+              </div>
+
               {items.length > 0 && (
                 <span
                   style={{
                     position: "absolute",
-                    top: "-5px",
-                    right: "-8px",
-                    backgroundColor: "red",
+                    top: "-4px",
+                    right: "-6px",
+                    backgroundColor: "#e74c3c",
                     color: "white",
                     borderRadius: "50%",
-                    width: "18px",
-                    height: "18px",
+                    width: "20px",
+                    height: "20px",
                     fontSize: "12px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    boxShadow: "0 1px 4px rgba(0,0,0,0.2)",
                   }}
                 >
                   {items.length}
+                </span>
+              )}
+            </div>
+            <div
+              style={{
+                position: "relative",
+                cursor: "pointer",
+                transition: "transform 0.2s ease",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
+            >
+              <div
+                onClick={() => navigate("cart")}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#fff",
+                  height: "38px",
+                  width: "38px",
+                  borderRadius: "50%",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                }}
+              >
+                <FaHeart color="#e74c3c" size={18} />
+              </div>
+
+              {allWishitems.length > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-4px",
+                    right: "-6px",
+                    backgroundColor: "#e74c3c",
+                    color: "white",
+                    borderRadius: "50%",
+                    width: "20px",
+                    height: "20px",
+                    fontSize: "12px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    boxShadow: "0 1px 4px rgba(0,0,0,0.2)",
+                  }}
+                >
+                  {allWishitems.length}
                 </span>
               )}
             </div>
@@ -87,13 +163,23 @@ function NavBarComponent() {
             <button
               onClick={logOut}
               style={{
-                border: "1px solid #fff",
-                borderRadius: "6px",
-                padding: "5px 12px",
+                border: "1.5px solid #fff",
+                borderRadius: "8px",
+                padding: "6px 16px",
                 color: "#fff",
                 background: "transparent",
                 cursor: "pointer",
                 fontWeight: "500",
+                letterSpacing: "0.5px",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#fff";
+                e.currentTarget.style.color = "#2c3e50";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "#fff";
               }}
             >
               Logout

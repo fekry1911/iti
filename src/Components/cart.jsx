@@ -59,6 +59,7 @@ export default function Cart() {
           </div>
           <div className={`row ${style.total}`}>
             <p>Total:</p>
+            <p>{subtotal}</p>
           </div>
           <button className={style.checkout_btn}>Proceed to Checkout</button>
         </div>
