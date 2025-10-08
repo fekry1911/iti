@@ -19,6 +19,13 @@ export async function getAllProducts() {
   let response = await axios.get(`${BASE_URL_PRODUCTS}`);
   return response.data;
 }
+
+export async function getFilterProducts(price_min, price_max) {
+  let response = await axios.get(
+    `${BASE_URL_PRODUCTS}/?price_min=${price_min}&price_max=${price_max}`
+  );
+  return response.data;
+}
 export async function getProductById(id) {
   let response = await axios.get(`${BASE_URL_PRODUCTS}/${id}`);
   return response.data;

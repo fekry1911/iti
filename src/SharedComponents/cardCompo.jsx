@@ -14,7 +14,7 @@ function CardComponent({ item }) {
   let navigate = useNavigate();
   return (
     <Card
-      onClick={() => navigate(`details/${item.id}`)}
+      onClick={() => navigate(`/main/details/${item.id}`)}
       className={style.card}
       style={{
         width: "100%",

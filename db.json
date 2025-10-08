@@ -66,6 +66,29 @@
       "creationAt": "2025-10-06T15:04:15.000Z",
       "updatedAt": "2025-10-07T01:22:43.000Z",
       "quantity": 1
+    },
+    {
+      "id": "170",
+      "title": "Elegant Patent Leather Peep-Toe Pumps with Gold-Tone Heel",
+      "slug": "elegant-patent-leather-peep-toe-pumps-with-gold-tone-heel",
+      "price": 53,
+      "description": "Step into sophistication with these chic peep-toe pumps, showcasing a lustrous patent leather finish and an eye-catching gold-tone block heel. The ornate buckle detail adds a touch of glamour, perfect for elevating your evening attire or complementing a polished daytime look.",
+      "category": {
+        "id": 62,
+        "name": "Shoes",
+        "slug": "shoes",
+        "image": "https://i.imgur.com/qNOjJje.jpeg",
+        "creationAt": "2025-10-08T05:48:30.000Z",
+        "updatedAt": "2025-10-08T05:48:30.000Z"
+      },
+      "images": [
+        "https://i.imgur.com/AzAY4Ed.jpeg",
+        "https://i.imgur.com/umfnS9P.jpeg",
+        "https://i.imgur.com/uFyuvLg.jpeg"
+      ],
+      "creationAt": "2025-10-08T05:48:35.000Z",
+      "updatedAt": "2025-10-08T05:48:35.000Z",
+      "quantity": 1
     }
   ],
   "wishlist": []

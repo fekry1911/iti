@@ -9,6 +9,7 @@ import removeFromCartReducer from "./removeFromCart";
 import addToWishListReducer from "./addToWishList";
 import getWishReducer from "./getWishList";
 import removeFromWishReducer from "./removeFromWish";
+import filterproductReducer from "./getFilterProducts";
 
 let store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ let store = configureStore({
     addWishList: addToWishListReducer,
     getWish: getWishReducer,
     removeWish: removeFromWishReducer,
+    filter: filterproductReducer,
   },
 });
 export default store;
