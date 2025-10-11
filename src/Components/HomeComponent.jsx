@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SimpleSlider from "./slickCompo";
 import CardComponent from "../SharedComponents/cardCompo";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,7 @@ import { useNavigate } from "react-router";
 import delivery from "../assets/images/delivery.png";
 import head from "../assets/images/head.png";
 import shield from "../assets/images/shield.png";
+import { getAllCategory } from "../redux/GetAllCate";
 
 export default function HomeComponent() {
   let titles = [
@@ -35,26 +36,34 @@ export default function HomeComponent() {
     "We return money within 30 days",
   ];
   let images1 = [delivery, head, shield];
-  let { items, loading, error } = useSelector((state) => state.products);
+
+  let { itemOfCate, loadingCate } = useSelector((state) => state.allCate);
+  let { items, loading } = useSelector((state) => state.products);
+
   let dispatch = useDispatch();
   let navigate = useNavigate();
+
+  const [showAllCategories, setShowAllCategories] = useState(false);
+
   useEffect(() => {
-    if (items.length == 0) {
+    if (itemOfCate.length === 0) {
+      dispatch(getAllCategory());
+    }
+    if (items.length === 0) {
       dispatch(getProducts());
     }
-  }, []);
+  }, [dispatch, itemOfCate.length, items.length]);
+
   let images = [clothes, elec, furnitures, shoes, miscellaneous, all];
-  let categories = [
-    "Clothes",
-    "Electronics",
-    "Furniture",
-    "Shoes",
-    "Miscellaneous",
-    "All",
-  ];
+
+  const displayedCategories = showAllCategories
+    ? itemOfCate
+    : itemOfCate.slice(0, 6);
+
   return (
     <div style={{ flex: 1 }} className="container">
       <SimpleSlider />
+
       <Flags title={"Today's"} />
       <Title title={"Flash Sales"} />
 
@@ -85,17 +94,42 @@ export default function HomeComponent() {
           </div>
         </>
       )}
-      <hr></hr>
+
+      <hr />
+
       <Flags title={"Categories"} />
       <Title title={"Browse By Category"} />
-      <div className="row   mb-5 g-3">
-        {categories.map((item, index) => (
-          <div className="col-6 col-md-3 col-lg-2">
-            <SideBarCombo item={item} image={images[index]} />
+
+      {loadingCate ? (
+        <AnimationLoadingCompo />
+      ) : (
+        <>
+          <div className="row mb-5 g-3">
+            {displayedCategories.map((item) => (
+              <div key={item.id} className="col-6 col-md-3 col-lg-2">
+                <SideBarCombo
+                  id={item.id}
+                  item={item.name}
+                  image={item.image || all}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <hr></hr>
+
+          {itemOfCate.length > 6 && (
+            <div className="d-flex justify-content-center align-items-center mb-5">
+              <Button
+                onClick={() => setShowAllCategories(!showAllCategories)}
+                className={`${style.button} mb-3`}
+              >
+                {showAllCategories ? "View Less" : "View All Categories"}
+              </Button>
+            </div>
+          )}
+        </>
+      )}
+
+      <hr />
 
       <Flags title={"This Month"} />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -107,6 +141,7 @@ export default function HomeComponent() {
           View All
         </Button>
       </div>
+
       {loading ? (
         <AnimationLoadingCompo />
       ) : (
@@ -122,7 +157,9 @@ export default function HomeComponent() {
           )}
         </div>
       )}
+
       <Enhance />
+
       <Flags title={"Our Products"} />
       <Title title={"Explore Our Products"} />
       {loading ? (
@@ -151,9 +188,11 @@ export default function HomeComponent() {
           </div>
         </div>
       )}
+
       <Flags title={"Featured"} />
       <Title title={"New Arrival"} />
       <Arrivals />
+
       <InfoCompo images={images1} titles={titles} texts={texts} />
     </div>
   );

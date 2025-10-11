@@ -8,25 +8,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/registerSlice";
 import { LoadingOverlay } from "../SharedComponents/loadingCompo";
 import toast, { Toaster } from "react-hot-toast";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function RegisterPage() {
-  // const notify = (message) => toast(message);
+  const notify = (message) => toast(message);
 
-  let navigate = useNavigate();
-  let email = useRef();
-  let password = useRef();
-  let name = useRef();
-  let phone = useRef();
-  let { user, loading, error } = useSelector((state) => state.register);
-  let dispatch = useDispatch();
+  const navigate = useNavigate();
+  const email = useRef();
+  const password = useRef();
+  const confirmPassword = useRef();
+  const name = useRef();
+  const phone = useRef();
+  const { loading } = useSelector((state) => state.register);
+  const dispatch = useDispatch();
 
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   function validateForm(values) {
     let newErrors = {};
 
     if (!values.name) {
       newErrors.name = "Name is required";
+    } else if (/^\d+$/.test(values.name)) {
+      newErrors.name = "Name cannot be numbers only";
     }
 
     if (!values.email) {
@@ -41,6 +47,12 @@ export default function RegisterPage() {
       newErrors.password = "Password must be at least 6 characters";
     }
 
+    if (!values.confirmPassword) {
+      newErrors.confirmPassword = "Please confirm your password";
+    } else if (values.password !== values.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
     if (!values.phone) {
       newErrors.phone = "Phone number is required";
     } else if (!/^\d{10,15}$/.test(values.phone)) {
@@ -51,8 +63,6 @@ export default function RegisterPage() {
   }
 
   async function handleSubmit(e) {
-    console.log(localStorage.getItem("token"));
-
     e.preventDefault();
 
     const data = {
@@ -60,7 +70,8 @@ export default function RegisterPage() {
       email: email.current.value,
       phone: phone.current.value,
       password: password.current.value,
-      password_confirmation: password.current.value,
+      confirmPassword: confirmPassword.current.value,
+      password_confirmation: confirmPassword.current.value,
       gender: "0",
     };
 
@@ -68,27 +79,29 @@ export default function RegisterPage() {
 
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
-    } else {
-      setErrors({});
-      try {
-        let res = await dispatch(registerUser(data)).unwrap();
+      return;
+    }
 
-        localStorage.setItem("token", res.data.token);
-        toast.success(res.message);
-        navigate("/auth");
-      } catch (err) {
-        if (err.data) {
-          err.data.email && toast.error(err.data.email[0]);
-          err.data.phone && toast.error(err.data.phone[0]);
-        } else {
-          toast.error(err.message);
-        }
+    setErrors({});
+    try {
+      const res = await dispatch(registerUser(data)).unwrap();
+      localStorage.setItem("token", res.data.token);
+      toast.success(res.message);
+      navigate("/auth");
+    } catch (err) {
+      if (err.data) {
+        err.data.email && notify(err.data.email[0]);
+        err.data.phone && notify(err.data.phone[0]);
+      } else {
+        toast.error(err.message);
       }
     }
   }
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
+      <Toaster />
+
       {loading && <LoadingOverlay />}
       <div style={{ width: "400px" }}>
         <img src={image} alt="logo" className={imageStyle.logo} />
@@ -97,6 +110,7 @@ export default function RegisterPage() {
         </div>
 
         <Form onSubmit={handleSubmit}>
+          {/* Email */}
           <Form.Group className="mb-2" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -107,11 +121,12 @@ export default function RegisterPage() {
                   : imageStyle.inputBorder
               }`}
               type="email"
-              placeholder="Enter Your email"
+              placeholder="Enter Your Email"
             />
             {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
           </Form.Group>
 
+          {/* Name */}
           <Form.Group className="mb-2" controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -127,23 +142,77 @@ export default function RegisterPage() {
             {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
           </Form.Group>
 
-          <Form.Group className="mb-2" controlId="formBasicPassword">
+          {/* Password */}
+          <Form.Group
+            className="mb-2 position-relative"
+            controlId="formBasicPassword"
+          >
             <Form.Label>Password</Form.Label>
-            <Form.Control
-              ref={password}
-              className={`${
-                errors.password
-                  ? imageStyle.inputBorderError
-                  : imageStyle.inputBorder
-              }`}
-              type="password"
-              placeholder="********"
-            />
+            <div style={{ position: "relative" }}>
+              <Form.Control
+                ref={password}
+                className={`${
+                  errors.password
+                    ? imageStyle.inputBorderError
+                    : imageStyle.inputBorder
+                }`}
+                type={showPassword ? "text" : "password"}
+                placeholder="********"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer",
+                }}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+            </div>
             {errors.password && (
               <p style={{ color: "red" }}>{errors.password}</p>
             )}
           </Form.Group>
 
+          {/* Confirm Password */}
+          <Form.Group
+            className="mb-2 position-relative"
+            controlId="formBasicConfirmPassword"
+          >
+            <Form.Label>Confirm Password</Form.Label>
+            <div style={{ position: "relative" }}>
+              <Form.Control
+                ref={confirmPassword}
+                className={`${
+                  errors.confirmPassword
+                    ? imageStyle.inputBorderError
+                    : imageStyle.inputBorder
+                }`}
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="********"
+              />
+              <span
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer",
+                }}
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+            </div>
+            {errors.confirmPassword && (
+              <p style={{ color: "red" }}>{errors.confirmPassword}</p>
+            )}
+          </Form.Group>
+
+          {/* Phone */}
           <Form.Group className="mb-4" controlId="formBasicPhone">
             <Form.Label>Phone</Form.Label>
             <Form.Control
@@ -153,7 +222,7 @@ export default function RegisterPage() {
                   ? imageStyle.inputBorderError
                   : imageStyle.inputBorder
               }`}
-              type="phone"
+              type="text"
               placeholder="Enter Your Phone"
             />
             {errors.phone && <p style={{ color: "red" }}>{errors.phone}</p>}

@@ -13,6 +13,8 @@ import WishProvider from "./context/wishProvider";
 import Cart from "./Components/cart";
 import AllProducts from "./Components/allProducts";
 import AboutCompo from "./Components/aboutCompo";
+import AllProductsInCateg from "./Components/getAllProductOfCategory";
+import Contact from "./Components/contact";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,8 @@ const router = createBrowserRouter([
       { path: "cart", element: <Cart /> },
       { path: "all", element: <AllProducts /> },
       { path: "about", element: <AboutCompo /> },
+      { path: "categ/:id", element: <AllProductsInCateg /> },
+      { path: "contact", element: <Contact /> },
       { path: "details/:id", element: <ProductDetails /> },
       { path: "*", element: <ErrorPage /> },
     ],

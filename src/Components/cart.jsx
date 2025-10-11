@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../context/cartContext";
 import style from "../styles/cart.module.css";
 export default function Cart() {
-  const { items } = useContext(CartContext);
+  const { items, clearCart1 } = useContext(CartContext);
 
   const subtotal = items.reduce(
     (acc, item) => acc + item.price * (item.quantity || 1),
@@ -61,7 +61,9 @@ export default function Cart() {
             <p>Total:</p>
             <p>{subtotal}</p>
           </div>
-          <button className={style.checkout_btn}>Proceed to Checkout</button>
+          <button onClick={() => clearCart1()} className={style.checkout_btn}>
+            Proceed to Checkout
+          </button>
         </div>
       </div>
     </div>

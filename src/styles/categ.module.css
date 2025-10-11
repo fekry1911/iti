@@ -25,9 +25,9 @@
   background-color: #92c1ef;
 }
 .name_text {
-  font-weight: 400; /* Weight / Regular */
-  font-style: normal; /* Style / Regular */
-  font-size: 16px; /* Size */
-  line-height: 24px; /* Line height */
-  letter-spacing: 0; /* Letter spacing 0% */
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
 }

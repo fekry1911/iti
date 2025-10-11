@@ -21,7 +21,7 @@
 }
 .card {
   background-color: transparent !important;
-  border: none !important;
+  border-bottom: 1px solid !important;
 }
 .text {
   font-family: "Poppins", sans-serif;

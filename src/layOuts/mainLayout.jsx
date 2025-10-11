@@ -16,6 +16,7 @@ export default function MainLayout() {
       <div style={{ flex: 1 }}>
         <Outlet />
       </div>
+      <FooterComponent />
     </div>
   );
 }

@@ -117,7 +117,6 @@ export default function ProductDetails() {
             ))}
           </div>
 
-          {/* الصورة الرئيسية */}
           <div className="col-lg-5 col-md-7 col-12 me-5">
             <img
               style={{
@@ -131,7 +130,6 @@ export default function ProductDetails() {
             />
           </div>
 
-          {/* تفاصيل المنتج */}
           <div
             style={{ height: "600px", overflowY: "hidden" }}
             className="col-lg-4 col-12"

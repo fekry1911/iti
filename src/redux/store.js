@@ -10,6 +10,8 @@ import addToWishListReducer from "./addToWishList";
 import getWishReducer from "./getWishList";
 import removeFromWishReducer from "./removeFromWish";
 import filterproductReducer from "./getFilterProducts";
+import categReducer from "./grtProductsOfCategory";
+import CateReducer from "./GetAllCate";
 
 let store = configureStore({
   reducer: {
@@ -24,6 +26,8 @@ let store = configureStore({
     getWish: getWishReducer,
     removeWish: removeFromWishReducer,
     filter: filterproductReducer,
+    category: categReducer,
+    allCate: CateReducer,
   },
 });
 export default store;

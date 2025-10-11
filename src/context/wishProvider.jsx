@@ -18,10 +18,11 @@ export default function WishProvider({ children }) {
     setWishItems(wishItems);
     console.log(wishItems);
   }, [wishItems]);
+  const clearWishList1 = () => setWishItems([]);
 
   return (
     <WishContext.Provider
-      value={{ allWishitems, loading, error, setWishItems }}
+      value={{ allWishitems, loading, error, setWishItems, clearWishList1 }}
     >
       {children}
     </WishContext.Provider>

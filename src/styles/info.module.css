@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto 24px auto; /* auto عشان يتسنتر في النص */
+  margin: 0 auto 24px auto;
 }
 
 .child {

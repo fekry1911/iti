@@ -1,29 +1,35 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import image from "../assets/images/mainLogo.png";
 import style from "../styles/navBar.module.css";
-import { FiShoppingCart } from "react-icons/fi";
-import { IconContext } from "react-icons";
-import { CartContext } from "../context/cartContext";
-import { useContext } from "react";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { useContext } from "react";
+import { CartContext } from "../context/cartContext";
 import { WishContext } from "../context/wishContext";
+import { clearCart, clearWishList } from "../apis/handleApis";
 
 function NavBarComponent() {
-  const { items } = useContext(CartContext);
-  const { allWishitems } = useContext(WishContext);
-
+  const { items, clearCart1 } = useContext(CartContext);
+  const { allWishitems, clearWishList1 } = useContext(WishContext);
   const navigate = useNavigate();
+  const location = useLocation(); // ← نستخدمها لمعرفة الصفحة الحالية
 
   function logOut() {
-    localStorage.removeItem("token");
-    setTimeout(() => {
-      navigate("/auth");
-    }, 1500);
+    clearCart().then(() => {
+      clearCart1();
+      clearWishList().then(() => {
+        clearWishList1();
+        localStorage.removeItem("token");
+        setTimeout(() => {
+          navigate("/auth");
+        }, 1500);
+      });
+    });
   }
+
+  const isActive = (path) => location.pathname === path; // ← تحديد الصفحة النشطة
 
   return (
     <Navbar
@@ -51,9 +57,26 @@ function NavBarComponent() {
         <Navbar.Toggle aria-controls="main-navbar" />
         <Navbar.Collapse id="main-navbar">
           <Nav className="mx-auto gap-3 text-center">
-            <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-            <Nav.Link onClick={() => navigate("/contact")}>Contact</Nav.Link>
-            <Nav.Link onClick={() => navigate("about")}>About</Nav.Link>
+            <Nav.Link
+              onClick={() => navigate("/main")}
+              className={isActive("/main") ? style.activeLink : ""}
+            >
+              Home
+            </Nav.Link>
+
+            <Nav.Link
+              onClick={() => navigate("contact")}
+              className={isActive("contact") ? style.activeLink : ""}
+            >
+              Contact
+            </Nav.Link>
+
+            <Nav.Link
+              onClick={() => navigate("about")}
+              className={isActive("about") ? style.activeLink : ""}
+            >
+              About
+            </Nav.Link>
           </Nav>
 
           <Nav className="d-flex align-items-center gap-3">
@@ -69,9 +92,9 @@ function NavBarComponent() {
               onMouseLeave={(e) =>
                 (e.currentTarget.style.transform = "scale(1)")
               }
+              onClick={() => navigate("cart")}
             >
               <div
-                onClick={() => navigate("cart")}
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -108,6 +131,7 @@ function NavBarComponent() {
                 </span>
               )}
             </div>
+
             <div
               style={{
                 position: "relative",
@@ -120,9 +144,9 @@ function NavBarComponent() {
               onMouseLeave={(e) =>
                 (e.currentTarget.style.transform = "scale(1)")
               }
+              onClick={() => navigate("wishlist")}
             >
               <div
-                onClick={() => navigate("cart")}
                 style={{
                   display: "flex",
                   justifyContent: "center",

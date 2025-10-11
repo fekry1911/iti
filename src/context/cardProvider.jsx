@@ -16,9 +16,12 @@ export default function CartProvider({ children }) {
     setItems(cartItems);
     console.log(cartItems);
   }, [cartItems]);
+  const clearCart1 = () => setItems([]);
 
   return (
-    <CartContext.Provider value={{ items, loading, error, setItems }}>
+    <CartContext.Provider
+      value={{ items, loading, error, setItems, clearCart1 }}
+    >
       {children}
     </CartContext.Provider>
   );
