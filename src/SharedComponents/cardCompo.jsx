@@ -116,13 +116,13 @@ function CardComponent({ item }) {
       </div>
 
       <Card.Img
+        className={style.img}
         style={{
           height: "250px",
           objectFit: "cover",
-          marginBottom: "16px",
+          marginBottom: "10px",
           width: "100%",
           overflow: "hidden",
-          borderRadius: "8px",
         }}
         alt={item.slug}
         src={item?.images?.[0] || image}
@@ -136,7 +136,7 @@ function CardComponent({ item }) {
           {item.title}
         </Card.Title>
         <Card.Text className={style.my_text}>$ {item.price}</Card.Text>
-        <div style={{ width: "100px", height: "20px" }}>
+        <div style={{ width: "100px", height: "20px", marginBottom: "12px" }}>
           <Rating name="half-rating" defaultValue={3} precision={0.5} />
         </div>
       </Card.Body>

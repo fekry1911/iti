@@ -23,6 +23,7 @@ import delivery from "../assets/images/delivery.png";
 import head from "../assets/images/head.png";
 import shield from "../assets/images/shield.png";
 import { getAllCategory } from "../redux/GetAllCate";
+import ProductsSlider from "../SharedComponents/SliderOfProducts";
 
 export default function HomeComponent() {
   let titles = [
@@ -71,15 +72,8 @@ export default function HomeComponent() {
         <AnimationLoadingCompo />
       ) : (
         <>
-          <div className={`${style.allProducts} row gx-3 mb-5`}>
-            {items.map(
-              (item, index) =>
-                index < 6 && (
-                  <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
-                    <CardComponent item={item} className="flex-fill h-100" />
-                  </div>
-                )
-            )}
+          <div className={`mb-5`}>
+            <ProductsSlider products={items} />
           </div>
           <div
             style={{ width: "100%" }}
@@ -145,16 +139,8 @@ export default function HomeComponent() {
       {loading ? (
         <AnimationLoadingCompo />
       ) : (
-        <div className={`${style.allProducts} row gx-3 mb-5`}>
-          {items.map(
-            (item, index) =>
-              index > 6 &&
-              index < 13 && (
-                <div key={item.id} className="col-6 col-md-3 col-lg-2 d-flex">
-                  <CardComponent item={item} className="flex-fill h-100" />
-                </div>
-              )
-          )}
+        <div className="mb-5">
+          <ProductsSlider products={items.slice(7, 20)} />
         </div>
       )}
 
